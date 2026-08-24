@@ -107,7 +107,8 @@ final class _BeeCountCategoryPort implements CategoryPort {
     required String ledgerId,
     required AutomationDirection direction,
   }) async {
-    final kind = direction == AutomationDirection.expense ? 'expense' : 'income';
+    final kind =
+        direction == AutomationDirection.expense ? 'expense' : 'income';
     final categories = await _repository.getUsableCategories(kind);
     return categories.map(_categorySummary).toList(growable: false);
   }
@@ -177,12 +178,10 @@ final class _BeeCountTransactionPort implements TransactionPort {
   Future<PostingResult> _postSerial(PostingCommand command) async {
     final ledgerId = int.tryParse(command.ledgerId);
     final accountId = int.tryParse(command.accountId);
-    final categoryId = command.categoryId == null
-        ? null
-        : int.tryParse(command.categoryId!);
-    final toAccountId = command.toAccountId == null
-        ? null
-        : int.tryParse(command.toAccountId!);
+    final categoryId =
+        command.categoryId == null ? null : int.tryParse(command.categoryId!);
+    final toAccountId =
+        command.toAccountId == null ? null : int.tryParse(command.toAccountId!);
     if (ledgerId == null ||
         accountId == null ||
         (command.categoryId != null && categoryId == null) ||

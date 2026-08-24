@@ -14,7 +14,8 @@ void main() {
   });
 
   test('host bridge imports only extension API and bundle packages', () {
-    final source = File('lib/extensions/beecount_host_services.dart').readAsStringSync();
+    final source =
+        File('lib/extensions/beecount_host_services.dart').readAsStringSync();
 
     expect(source, isNot(contains('beecount_automation_core')));
     expect(source, isNot(contains('beecount_automation_android')));
