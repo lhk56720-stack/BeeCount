@@ -46,6 +46,7 @@ import 'package:in_app_review/in_app_review.dart';
 import '../../services/system/update_service.dart';
 import '../../utils/ui_scale_extensions.dart';
 import '../donation/donation_page.dart';
+import '../../extensions/extension_routes.dart';
 
 class MinePage extends ConsumerWidget {
   const MinePage({super.key});
@@ -313,6 +314,18 @@ class MinePage extends ConsumerWidget {
                         },
                       ),
                       BeeTokens.cardDivider(context),
+                      if (Platform.isAndroid) ...[
+                        AppListTile(
+                          leading: Icons.receipt_long_outlined,
+                          title: '自动记账',
+                          subtitle: '支付通知、待确认账单与智能自动入账',
+                          trailing: Icon(Icons.chevron_right,
+                              color: BeeTokens.iconTertiary(context),
+                              size: 20),
+                          onTap: () => openAutomationSettings(context),
+                        ),
+                        BeeTokens.cardDivider(context),
+                      ],
                       // 数据管理
                       AppListTile(
                         leading: Icons.storage_outlined,

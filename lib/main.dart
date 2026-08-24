@@ -19,6 +19,7 @@ import 'pages/auth/splash_page.dart';
 import 'pages/auth/welcome_page.dart';
 import 'pages/auth/app_lock_screen.dart';
 import 'providers/security_providers.dart';
+import 'extensions/extension_bootstrap.dart';
 import 'services/system/reminder_monitor_service.dart';
 import 'providers/credit_card_reminder_providers.dart';
 import 'services/platform/screenshot_monitor_service.dart';
@@ -129,6 +130,11 @@ Future<void> main() async {
   // 恢复截图自动识别设置（Android专属），传入container
   await _restoreScreenshotMonitor(container);
 
+  // 自动记账扩展默认关闭；初始化失败不影响上游账本与截图记账流程。
+  if (Platform.isAndroid) {
+    unawaited(_initializeAutomationExtensions(container));
+  }
+
   // 初始化图片分享处理服务（Android专属）
   if (Platform.isAndroid) {
     _setupImageShareHandler(container);
@@ -158,6 +164,14 @@ Future<void> main() async {
     parent: container,
     child: const MainApp(),
   ));
+}
+
+Future<void> _initializeAutomationExtensions(ProviderContainer container) async {
+  try {
+    await BeeCountExtensionBootstrap.initialize(container);
+  } catch (_) {
+    logger.warning('Extensions', '自动记账扩展初始化失败');
+  }
 }
 
 /// Provider observer to update widget on app start

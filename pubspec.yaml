@@ -85,6 +85,16 @@ dependencies:
     path: packages/flutter_cloud_sync_icloud
   flutter_cloud_sync_s3:
     path: packages/flutter_cloud_sync_s3
+  beecount_extension_api:
+    git:
+      url: https://github.com/lhk56720-stack/beecount-extensions.git
+      ref: 7fc16e183cf7a7a24eff9bbb2aad2f067f3cf73e
+      path: packages/beecount_extension_api
+  beecount_extensions_bundle:
+    git:
+      url: https://github.com/lhk56720-stack/beecount-extensions.git
+      ref: 7fc16e183cf7a7a24eff9bbb2aad2f067f3cf73e
+      path: packages/beecount_extensions_bundle
   quick_actions: ^1.1.0
   table_calendar: ^3.1.0
   local_auth: ^2.3.0
