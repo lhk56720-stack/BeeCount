@@ -88,12 +88,12 @@ dependencies:
   beecount_extension_api:
     git:
       url: https://github.com/lhk56720-stack/beecount-extensions.git
-      ref: 8c84d50069308c56ae489d3a9314e6c63503ab2c
+      ref: 908017eb622c33d5dcd692b860b0340576d784f8
       path: packages/beecount_extension_api
   beecount_extensions_bundle:
     git:
       url: https://github.com/lhk56720-stack/beecount-extensions.git
-      ref: 8c84d50069308c56ae489d3a9314e6c63503ab2c
+      ref: 908017eb622c33d5dcd692b860b0340576d784f8
       path: packages/beecount_extensions_bundle
   quick_actions: ^1.1.0
   table_calendar: ^3.1.0

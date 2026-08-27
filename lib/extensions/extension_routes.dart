@@ -11,6 +11,8 @@ Future<void> openAutomationSettings(BuildContext context) async {
     );
     return;
   }
+  await controller.refresh();
+  if (!context.mounted) return;
   await Navigator.of(context).push(
     MaterialPageRoute<void>(
       builder: (_) => AutomationSettingsPage(controller: controller),

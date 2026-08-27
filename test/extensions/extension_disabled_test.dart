@@ -21,4 +21,12 @@ void main() {
     expect(source, isNot(contains('beecount_automation_android')));
     expect(source, contains('beecount_extension_api'));
   });
+
+  test('foreground resume refreshes the encrypted automation queue', () {
+    final source =
+        File('lib/extensions/extension_bootstrap.dart').readAsStringSync();
+
+    expect(source, contains('AppLifecycleState.resumed'));
+    expect(source, contains('_controller.refresh()'));
+  });
 }

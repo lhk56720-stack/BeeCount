@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:beecount_extensions_bundle/beecount_extensions_bundle.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'beecount_host_services.dart';
@@ -19,5 +22,24 @@ final class BeeCountExtensionBootstrap {
     );
     await controller.initialize();
     _controller = controller;
+    WidgetsBinding.instance.addObserver(
+      _AutomationLifecycleObserver(controller),
+    );
+  }
+}
+
+final class _AutomationLifecycleObserver with WidgetsBindingObserver {
+  _AutomationLifecycleObserver(this._controller);
+
+  final AutomationBundleController _controller;
+  Future<void>? _pendingRefresh;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed || _pendingRefresh != null) return;
+    _pendingRefresh = _controller.refresh().whenComplete(() {
+      _pendingRefresh = null;
+    });
+    unawaited(_pendingRefresh);
   }
 }
